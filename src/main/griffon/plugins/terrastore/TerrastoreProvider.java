@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
+package griffon.plugins.terrastore;
+
+import groovy.lang.Closure;
+import griffon.util.CallableWithArgs;
+
 /**
  * @author Andres Almiray
  */
+public interface TerrastoreProvider {
+    Object withTerrastore(Closure closure);
 
-// check to see if we already have a TerrastoreGriffonAddon
-configText = '''root.'TerrastoreGriffonAddon'.addon=true'''
-if(builderConfigFile.text.contains(configText)) {
-    println 'Removing TerrastoreGriffonAddon from Builder.groovy'
-    builderConfigFile.text -= configText
+    Object withTerrastore(String clientName, Closure closure);
+
+    <T> T withTerrastore(CallableWithArgs<T> callable);
+
+    <T> T withTerrastore(String clientName, CallableWithArgs<T> callable);
 }

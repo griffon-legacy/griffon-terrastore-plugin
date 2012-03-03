@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2011-2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package griffon.plugins.terrastore
 
 import terrastore.client.TerrastoreClient
@@ -31,25 +32,10 @@ import org.slf4j.LoggerFactory
  * @author Andres Almiray
  */
 @Singleton
-final class TerrastoreConnector {
+final class TerrastoreConnector implements TerrastoreProvider {
     private bootstrap
 
     private static final Logger LOG = LoggerFactory.getLogger(TerrastoreConnector)
-
-    static void enhance(MetaClass mc) {
-        mc.withTerrastore = {Closure closure ->
-            TerrastoreClientHolder.instance.withTerrastore('default', closure)
-        }
-        mc.withTerrastore << {String clientName, Closure closure ->
-            TerrastoreClientHolder.instance.withTerrastore(clientName, closure)
-        }
-        mc.withTerrastore << {CallableWithArgs callable ->
-            TerrastoreClientHolder.instance.withTerrastore('default', callable)
-        }
-        mc.withTerrastore << {String clientName, CallableWithArgs callable ->
-            TerrastoreClientHolder.instance.withTerrastore(clientName, callable)
-        }
-    }
 
     Object withTerrastore(String clientName = 'default', Closure closure) {
         TerrastoreClientHolder.instance.withTerrastore(clientName, closure)
