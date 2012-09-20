@@ -27,7 +27,7 @@ final class TerrastoreEnhancer {
     private static final Logger LOG = LoggerFactory.getLogger(TerrastoreEnhancer)
 
     private TerrastoreEnhancer() {}
-    
+
     static void enhance(MetaClass mc, TerrastoreProvider provider = TerrastoreClientHolder.instance) {
         if(LOG.debugEnabled) LOG.debug("Enhancing $mc with $provider")
         mc.withTerrastore = {Closure closure ->

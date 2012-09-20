@@ -11,11 +11,11 @@ griffon.project.dependency.resolution = {
     }
     dependencies {
         compile('terrastore:terrastore-javaclient:2.4.1',
-                'org.jboss.resteasy:jaxrs-api:2.0.0.GA',
-                'org.jboss.resteasy:resteasy-jaxrs:2.0.0.GA',
+                'org.jboss.resteasy:jaxrs-api:2.3.4.Final',
+                'org.jboss.resteasy:resteasy-jaxrs:2.3.4.Final',
                 'commons-io:commons-io:2.0',
-                'commons-lang:commons-lang:2.4',
-                'org.codehaus.jackson:jackson-jaxrs:1.9.0') {
+                'commons-lang:commons-lang:2.6',
+                'org.codehaus.jackson:jackson-jaxrs:1.9.9') {
             exclude group: 'org.slf4j'
             excludes 'httpclient', 'junit'            
         }

@@ -34,7 +34,7 @@ class TerrastoreClientHolder implements TerrastoreProvider {
     private static final Logger LOG = LoggerFactory.getLogger(TerrastoreClientHolder)
     private static final Object[] LOCK = new Object[0]
     private final Map<String, TerrastoreClient> clients = [:]
-  
+
     String[] getClientNames() {
         List<String> clientNames = new ArrayList().addAll(clients.keySet())
         clientNames.toArray(new String[clientNames.size()])
@@ -47,7 +47,7 @@ class TerrastoreClientHolder implements TerrastoreProvider {
 
     void setClient(String clientName = 'default', TerrastoreClient client) {
         if(isBlank(clientName)) clientName = 'default'
-        storeClient(clientName, client)       
+        storeClient(clientName, client)
     }
 
     Object withTerrastore(String clientName = 'default', Closure closure) {
@@ -67,10 +67,10 @@ class TerrastoreClientHolder implements TerrastoreProvider {
         if(isBlank(clientName)) clientName = 'default'
         retrieveClient(clientName) != null
     }
-    
+
     void disconnectClient(String clientName) {
         if(isBlank(clientName)) clientName = 'default'
-        storeClient(clientName, null)        
+        storeClient(clientName, null)
     }
 
     private TerrastoreClient fetchClient(String clientName) {
@@ -81,7 +81,7 @@ class TerrastoreClientHolder implements TerrastoreProvider {
             ConfigObject config = TerrastoreConnector.instance.createConfig(app)
             client = TerrastoreConnector.instance.connect(app, config, clientName)
         }
-        
+
         if(client == null) {
             throw new IllegalArgumentException("No such TerrastoreClient configuration for name $clientName")
         }

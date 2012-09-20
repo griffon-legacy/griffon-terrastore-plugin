@@ -24,6 +24,7 @@ import griffon.core.GriffonApplication
 import griffon.util.Environment
 import griffon.util.Metadata
 import griffon.util.CallableWithArgs
+import griffon.util.ConfigUtils
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -48,8 +49,7 @@ final class TerrastoreConnector implements TerrastoreProvider {
     // ======================================================
 
     ConfigObject createConfig(GriffonApplication app) {
-        def clientClass = app.class.classLoader.loadClass('TerrastoreConfig')
-        new ConfigSlurper(Environment.current.name).parse(clientClass)
+        ConfigUtils.loadConfigWithI18n('TerrastoreConfig')
     }
 
     private ConfigObject narrowConfig(ConfigObject config, String clientName) {

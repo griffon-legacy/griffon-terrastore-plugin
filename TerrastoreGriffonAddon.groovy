@@ -37,7 +37,7 @@ class TerrastoreGriffonAddon {
         }
     }
 
-    def events = [
+    Map events = [
         ShutdownStart: { app ->
             ConfigObject config = TerrastoreConnector.instance.createConfig(app)
             TerrastoreConnector.instance.disconnect(app, config)
